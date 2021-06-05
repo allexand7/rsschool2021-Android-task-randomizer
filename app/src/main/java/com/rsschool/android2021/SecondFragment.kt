@@ -77,7 +77,6 @@ class SecondFragment : Fragment() {
 
         private const val MIN_VALUE_KEY = "MIN_VALUE"
         private const val MAX_VALUE_KEY = "MAX_VALUE"
-        private const val RESULT_VALUE = "RESULT_VALUE"
     }
 
 //    override fun onBackPressed(): Int {
