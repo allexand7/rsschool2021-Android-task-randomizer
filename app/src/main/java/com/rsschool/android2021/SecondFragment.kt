@@ -12,14 +12,14 @@ import androidx.fragment.app.Fragment
 
 class SecondFragment : Fragment() {
     private var previousRes: Int? = 0
-    private var listener: IonActionPerformedSecondFragment? = null
+    private var listener: IListener? = null
 
     private var backButton: Button? = null
     private var result: TextView? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as IonActionPerformedSecondFragment
+        listener = context as IListener
     }
 
     override fun onCreateView(
@@ -44,10 +44,10 @@ class SecondFragment : Fragment() {
         backButton?.setOnClickListener {
             // TODO: implement back
             previousRes = result?.text.toString().toInt()
-            listener?.onActionPerformedSecondFragment(previousRes!!)
+            listener?.onActionClickForFirstFragment(previousRes!!)
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            listener?.onActionPerformedSecondFragment(previousRes!!)
+            listener?.onActionClickForFirstFragment(previousRes!!)
         }
     }
 
@@ -84,7 +84,5 @@ class SecondFragment : Fragment() {
 //        return result?.text.toString().toInt()
 //    }
 
-    interface IonActionPerformedSecondFragment {
-        fun onActionPerformedSecondFragment(resValue: Int)
-    }
+
 }

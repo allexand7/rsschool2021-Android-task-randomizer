@@ -1,13 +1,14 @@
 package com.rsschool.android2021;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity implements FirstFragment.IActionPerformedListener {
+public class MainActivity extends AppCompatActivity implements IListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.IAc
         final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, firstFragment);
         // TODO: invoke function which apply changes of the transaction
-        transaction.commitNow();
+        transaction.commit();
 
     }
 
@@ -31,14 +32,17 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.IAc
         final Fragment secondFragment = SecondFragment.newInstance(min, max);
         final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, secondFragment);
-        transaction.commitNow();
+        transaction.commit();
     }
 
-
+    @Override
+    public void onActionClickForSecondFragment(int min, int max) {
+        openSecondFragment(min, max);
+    }
 
     @Override
-    public void onActionPerformed(int min, int max) {
-        openSecondFragment(min, max);
+    public void onActionClickForFirstFragment(int prevValue) {
+        openFirstFragment(prevValue);
     }
 
 }

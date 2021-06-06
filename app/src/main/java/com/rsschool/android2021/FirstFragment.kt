@@ -18,11 +18,11 @@ class FirstFragment : Fragment() {
 
     private var generateButton: Button? = null
     private var previousResult: TextView? = null
-    private var listener: IActionPerformedListener? = null
+    private var listener: IListener? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as IActionPerformedListener
+        listener = context as IListener
     }
 
 
@@ -49,13 +49,12 @@ class FirstFragment : Fragment() {
 
         generateButton?.setOnClickListener {
             val maxInt = Int.MAX_VALUE
-            val minResValue = min.text.toString().toInt()
-            val maxResValue = max.text.toString().toInt()
             try {
-
+                val minResValue = min.text.toString().toInt()
+                val maxResValue = max.text.toString().toInt()
                 Log.d("FirstFragment", "$minResValue and $maxResValue")
                 if (maxResValue > minResValue) {
-                    listener?.onActionPerformed(minResValue, maxResValue)
+                    listener?.onActionClickForSecondFragment(minResValue, maxResValue)
                 } else {
                     showToast(R.string.toast_error_incorrect_value)
                 }
